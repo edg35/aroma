@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "88827827665",
+    "project_id": "aroma-backend",
+    "storage_bucket": "aroma-backend.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:88827827665:android:608c1433ad6614d75bfcf0",
+        "android_client_info": {
+          "package_name": "com.example.aroma_flutter"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWM8rxxWGLosP9W9eJUtvDwJdbsqNuPUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
