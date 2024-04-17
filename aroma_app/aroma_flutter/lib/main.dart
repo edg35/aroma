@@ -8,11 +8,12 @@ Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (kIsWeb) {
     await Firebase.initializeApp(
-        options: const FirebaseOptions(
-            apiKey: "AIzaSyD5Qizoen23Hz_p1Z12h6aEH98Dsy0oGBw",
-            appId: "1:88827827665:web:a9a3a21290535ed75bfcf0",
-            messagingSenderId: "88827827665",
-            projectId: "aroma-backend"));
+      options: const FirebaseOptions(
+          apiKey: "AIzaSyD5Qizoen23Hz_p1Z12h6aEH98Dsy0oGBw",
+          appId: "1:88827827665:web:a9a3a21290535ed75bfcf0",
+          messagingSenderId: "88827827665",
+          projectId: "aroma-backend"),
+    );
   }
   runApp(const MyApp());
 }
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
         title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
         home: SplashScreen(
           child: LoginPage(),
         ));
