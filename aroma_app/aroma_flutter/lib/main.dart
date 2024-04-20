@@ -11,12 +11,16 @@ Future main() async {
   if (kIsWeb) {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-          apiKey: "AIzaSyD5Qizoen23Hz_p1Z12h6aEH98Dsy0oGBw",
-          appId: "1:88827827665:web:a9a3a21290535ed75bfcf0",
-          messagingSenderId: "88827827665",
-          projectId: "aroma-backend"),
+        apiKey: "AIzaSyD5Qizoen23Hz_p1Z12h6aEH98Dsy0oGBw",
+        appId: "1:88827827665:web:a9a3a21290535ed75bfcf0",
+        messagingSenderId: "88827827665",
+        projectId: "aroma-backend",
+      ),
     );
+  } else {
+    await Firebase.initializeApp();
   }
+
   runApp(const MyApp());
 }
 

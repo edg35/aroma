@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:aroma_flutter/features/user_auth/firebase_auth_implementation/firebase_auth_services.dart';
 import 'package:aroma_flutter/features/user_auth/presentation/pages/signup_page.dart';
 import 'package:aroma_flutter/features/user_auth/presentation/widgets/form_container_widget.dart';
