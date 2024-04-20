@@ -19,6 +19,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isSigningUp = false;
+
   // Avoid Memory Leak
   @override
   void dispose() {
@@ -71,14 +73,18 @@ class _SignUpPageState extends State<SignUpPage> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.blue,
                     ),
-                    child: const Center(
-                      child: Text(
-                        "Sign Up",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
+                    child: Center(
+                      child: _isSigningUp
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Sign Up",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                     ),
                   ),
                 ),
@@ -119,10 +125,18 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   void _signUp() async {
+    setState(() {
+      _isSigningUp = true;
+    });
+
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signUpWithEmailAndPassword(email, password);
+
+    setState(() {
+      _isSigningUp = false;
+    });
 
     if (user != null) {
       // Navigate to Home Page

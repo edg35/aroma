@@ -19,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  bool _isSigningIn = false;
+
   // Avoid Memory Leak
   @override
   void dispose() {
@@ -71,12 +73,17 @@ class _LoginPageState extends State<LoginPage> {
                       borderRadius: BorderRadius.circular(10),
                       color: Colors.blue,
                     ),
-                    child: const Center(
-                      child: Text(
-                        "Login",
-                        style: TextStyle(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                    child: Center(
+                      child: _isSigningIn
+                          ? const CircularProgressIndicator(
+                              color: Colors.white,
+                            )
+                          : const Text(
+                              "Login",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold),
+                            ),
                     )),
               ),
               const SizedBox(
@@ -116,21 +123,22 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void _signIn() async {
+    setState(() {
+      _isSigningIn = true;
+    });
+
     String email = _emailController.text;
     String password = _passwordController.text;
 
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
+    setState(() {
+      _isSigningIn = false;
+    });
+
     if (user != null) {
       // Navigate to Home Page
       Navigator.pushNamed(context, "/home");
-    } else {
-      // Show Error Message
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Sign In Failed"),
-        ),
-      );
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:aroma_flutter/features/user_auth/presentation/pages/login_page.dart';
+import 'package:aroma_flutter/global/common/toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -30,21 +31,23 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => const LoginPage()),
                   (route) => false);
+              showToast(message: "Logged out successfully");
             },
             child: Container(
-                width: 100,
-                height: 45,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: Colors.blue,
+              width: 100,
+              height: 45,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.blue,
+              ),
+              child: const Center(
+                child: Text(
+                  "Logout",
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                 ),
-                child: const Center(
-                  child: Text(
-                    "Logout",
-                    style: TextStyle(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
-                )),
+              ),
+            ),
           ),
         ],
       ),
