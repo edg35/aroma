@@ -1,5 +1,7 @@
 import 'package:aroma_flutter/features/app/splash_screen/splash_screen.dart';
+import 'package:aroma_flutter/features/user_auth/presentation/pages/home_page.dart';
 import 'package:aroma_flutter/features/user_auth/presentation/pages/login_page.dart';
+import 'package:aroma_flutter/features/user_auth/presentation/pages/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,11 +26,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-        title: 'Flutter Demo',
-        debugShowCheckedModeBanner: false,
-        home: SplashScreen(
-          child: LoginPage(),
-        ));
+    return MaterialApp(
+      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (context) => const SplashScreen(
+              // Here, you can decide whether to show the LoginPage or HomePage based on user authentication
+              child: LoginPage(),
+            ),
+        '/login': (context) => const LoginPage(),
+        '/signUp': (context) => const SignUpPage(),
+        '/home': (context) => const HomePage(),
+      },
+    );
   }
 }
