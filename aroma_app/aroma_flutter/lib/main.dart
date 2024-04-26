@@ -1,6 +1,7 @@
 import 'package:aroma_flutter/features/app/splash_screen/splash_screen.dart';
 import 'package:aroma_flutter/features/user_auth/presentation/pages/home_page.dart';
 import 'package:aroma_flutter/features/user_auth/presentation/pages/login_page.dart';
+import 'package:aroma_flutter/features/user_auth/presentation/pages/report_page.dart';
 import 'package:aroma_flutter/features/user_auth/presentation/pages/signup_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
@@ -36,11 +37,13 @@ class MyApp extends StatelessWidget {
       routes: {
         '/': (context) => const SplashScreen(
               // Here, you can decide whether to show the LoginPage or HomePage based on user authentication
-              child: LoginPage(),
+              // TODO: Change this back to login when done working
+              child: HomePage(),
             ),
         '/login': (context) => const LoginPage(),
         '/signUp': (context) => const SignUpPage(),
         '/home': (context) => const HomePage(),
+        '/newreport': (context) => const ReportPage(),
       },
     );
   }
