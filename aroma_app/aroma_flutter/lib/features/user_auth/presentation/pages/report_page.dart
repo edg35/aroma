@@ -10,6 +10,7 @@ class ReportPage extends StatefulWidget {
 class _ReportPageState extends State<ReportPage> {
   String? smellType; // To store the selected smell type
   double severity = 1.0; // To store the selected severity rating
+  bool _isSubmitting = false; // To handle loading icon on button click
   final descriptionController = TextEditingController();
 
   @override
@@ -79,6 +80,12 @@ class _ReportPageState extends State<ReportPage> {
             const SizedBox(height: 16.0), // Add spacing
 
             // Optional description text field
+            //TODO: change this to form_container_widget and update the widget
+            /* 
+            the widget should have a parameter for maxlines, and outlineinput
+            border. Change to make it as reusable as possible. Look into custom 
+            slider and dropdown widget as well.
+            */
             TextField(
               decoration: InputDecoration(
                 labelText: 'Additional Description (optional)',
@@ -102,14 +109,18 @@ class _ReportPageState extends State<ReportPage> {
                   borderRadius: BorderRadius.circular(10),
                   color: Colors.blue,
                 ),
-                child: const Center(
-                  child: Text(
-                    "Submit Report",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                child: Center(
+                  child: _isSubmitting
+                      ? const CircularProgressIndicator(
+                          color: Colors.white,
+                        )
+                      : const Text(
+                          "Submit Report",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                 ),
               ),
             ),
@@ -120,7 +131,16 @@ class _ReportPageState extends State<ReportPage> {
   }
 
   void _submitReport() async {
+    setState(() {
+      _isSubmitting = true;
+    });
+
     String description = descriptionController.text;
+    // ignore: avoid_print
     print("Submitting report... $smellType, $severity, $description");
+
+    setState(() {
+      _isSubmitting = false;
+    });
   }
 }
