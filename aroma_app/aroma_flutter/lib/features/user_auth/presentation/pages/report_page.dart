@@ -10,6 +10,7 @@ class ReportPage extends StatefulWidget {
 class _ReportPageState extends State<ReportPage> {
   String? smellType; // To store the selected smell type
   double severity = 1.0; // To store the selected severity rating
+  final descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class _ReportPageState extends State<ReportPage> {
         title: const Text('Report a Strange Smell'),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(50.0),
         child: Column(
           children: [
             // Smell selection section
@@ -47,14 +48,21 @@ class _ReportPageState extends State<ReportPage> {
               onChanged: (value) => setState(() => smellType = value!),
             ),
 
-            if (smellType == "Other")
-              // Text field for custom smell type if "Other" is selected
-              TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Enter Smell Description (optional)',
+            /* if (smellType == "Other")
+              // Text field for custom smell type if "Other" is selected // Add spacing
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    labelText: 'Enter Smell Description (optional)',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                  onChanged: (value) => setState(() => smellType = value),
                 ),
-                onChanged: (value) => setState(() => smellType = value),
               ),
+            */
 
             const SizedBox(height: 16.0), // Add spacing
 
@@ -71,28 +79,48 @@ class _ReportPageState extends State<ReportPage> {
             const SizedBox(height: 16.0), // Add spacing
 
             // Optional description text field
-            const TextField(
+            TextField(
               decoration: InputDecoration(
                 labelText: 'Additional Description (optional)',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              maxLines: 3, // Allow for multiple lines of text
+              maxLines: 2, // Allow for multiple lines of text
+              controller: descriptionController,
             ),
 
             const SizedBox(height: 16.0), // Add spacing
 
             // Submit button
-            ElevatedButton(
-              onPressed: () {
-                // Handle form submission (send report data)
-                // You can add logic here to send the smellType, severity, and optional description to your backend service.
-                // ignore: avoid_print
-                print('Smell reported: $smellType, Severity: $severity');
-              },
-              child: const Text('Submit Report'),
+            GestureDetector(
+              onTap: _submitReport,
+              child: Container(
+                width: double.infinity,
+                height: 45,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.blue,
+                ),
+                child: const Center(
+                  child: Text(
+                    "Submit Report",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _submitReport() async {
+    String description = descriptionController.text;
+    print("Submitting report... $smellType, $severity, $description");
   }
 }
